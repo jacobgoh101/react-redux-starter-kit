@@ -6,6 +6,8 @@ const webpackConfig = require('../config/webpack.config')
 const project = require('../config/project.config')
 const compress = require('compression')
 
+const apiApp = require('./apiApp')
+
 const app = express()
 
 // Apply gzip compression
@@ -36,6 +38,9 @@ if (project.env === 'development') {
   // of development since this directory will be copied into ~/dist
   // when the application is compiled.
   app.use(express.static(project.paths.public()))
+
+  // api app
+  app.use('/api', apiApp);
 
   // This rewrites all routes requests to the root /index.html file
   // (ignoring file requests). If you want to implement universal
